@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="view"></div>
+		<div><button onclick="updateView()">wadwad</button></div>
+		<script>
+			const view = document.getElementById("view");
+			const model = {
+				app: {},
+				inputs: {},
+				data: {
+					items: [],
+					itemLinks: [],
+				},
+			};
+
+			let b64 = "";
+			let inputFile = "";
+			let previewSrc = "";
+
+			updateView();
+			function updateView() {
+				view.innerHTML = /*HTML*/ `
+				<input type="file" id="fileUpload" onchange="storeImg()">
+				<img src="${model.data.itemLinks[0]}" id="image" style="display: block;">
+				<button onclick="convertBtoI()">convert</button>
+				<img src="" id="BtoI" style="display: block;">
+				`;
+			}
+
+			function changeImg() {
+				const file = document.getElementById("fileUpload");
+				const preview = document.getElementById("image");
+				inputFile = file.files[0];
+				previewSrc = URL.createObjectURL(inputFile);
+
+				b64 = btoa(preview.src);
+				updateView();
+			}
+
+			function storeImg() {
+				const file = document.getElementById("fileUpload");
+				const preview = document.getElementById("image");
+				model.data.items.push(file.files[0]);
+				previewSrc = URL.createObjectURL(model.data.items[0]);
+				model.data.itemLinks.push(
+					URL.createObjectURL(model.data.items[0]),
+				);
+				updateView();
+			}
+		</script>
+	</body>
+</html>
