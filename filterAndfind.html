@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="page"></div>
+		<script>
+			const page = document.getElementById("page");
+
+			const data = [
+				42,
+				"hello",
+				"",
+				null,
+				undefined,
+				true,
+				false,
+				{
+					id: 1,
+					name: "Alice",
+					age: 25,
+					active: true,
+					hobbies: ["reading", "gaming"],
+				},
+				{
+					id: 2,
+					name: "Bob",
+					age: 30,
+					active: false,
+					hobbies: ["sports", "cooking"],
+				},
+				{ id: 3, name: "Charlie", age: 35, active: true, hobbies: [] },
+				{ id: 4, name: "Diana", age: 28, active: false },
+				[1, 2, 3],
+				[],
+				{
+					id: 5,
+					name: "Eve",
+					age: null,
+					active: true,
+					hobbies: ["hacking"],
+				},
+				"world",
+				0,
+				-15,
+				3.14,
+				{ random: "object without expected keys" },
+				["nested", { deep: true }],
+				NaN,
+			];
+
+			updatePage();
+			function updatePage() {
+				page.innerHTML = /*HTML*/ `${filtered()}`;
+			}
+
+			function filtered() {
+				return data.filter((w) => typeof w === "boolean");
+			}
+		</script>
+	</body>
+</html>
